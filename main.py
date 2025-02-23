@@ -9,13 +9,14 @@ import os
 
 app = FastAPI()
 
-# Configure CORS
+# Configure CORS with specific origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://cryptonian-rust.vercel.app/"],  # In production, replace with your frontend URL
+    allow_origins=["https://cryptonian-rust.vercel.app"],  # Specific frontend URL
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization", "X-Requested-With"],
+    max_age=600,  # Cache preflight requests for 10 minutes
 )
 
 # Data model for wallet address
