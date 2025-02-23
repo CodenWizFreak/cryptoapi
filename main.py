@@ -40,6 +40,10 @@ def get_wallet_address():
         return {"wallet_address": "", "connected": False}
     with open(WALLET_FILE, "r") as f:
         return json.load(f)
+    
+@app.get("/api/")
+async def read_root():
+    return {"message": "Welcome to Cryptonian API!"}  
 
 @app.post("/api/connect-wallet")
 async def connect_wallet(wallet: WalletAddress):
